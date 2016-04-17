@@ -5,7 +5,9 @@ import groovyx.net.http.HttpResponseException
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.RESTClient
 
-restClient = new RESTClient('http://jwubuntu.dcenter.delphix.com')
+String baseUrl = System.getProperty('baseUrl')
+
+restClient = new RESTClient(baseUrl)
 
 String getPath(String name, boolean isView) {
     if (name.startsWith('/')) {
