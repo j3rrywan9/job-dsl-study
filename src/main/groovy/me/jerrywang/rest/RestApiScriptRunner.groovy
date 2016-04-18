@@ -1,6 +1,7 @@
 package me.jerrywang.rest
 
 import javaposse.jobdsl.dsl.DslScriptLoader
+import javaposse.jobdsl.dsl.ScriptRequest
 import me.jerrywang.rest.RestApiJobManagement
 
 String pattern = System.getProperty('pattern')
@@ -19,7 +20,8 @@ RestApiJobManagement jobManagement = new RestApiJobManagement(baseUrl)
 new FileNameFinder().getFileNames('.', pattern).each { String fileName ->
     println "\nProcessing file: $fileName"
     File file = new File(fileName)
-    DslScriptLoader.runDslEngine(file.text, jobManagement)
+    ScriptRequest scriptRequest = new ScriptRequest(file.text)
+    new DslScriptLoader(jobManagement).runScripts([scriptRequest])
     println "\nFinished processing file: $fileName"
 }
 
