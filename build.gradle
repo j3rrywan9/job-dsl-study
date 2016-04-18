@@ -17,14 +17,20 @@ dependencies {
     }
 }
 
-task debug(dependsOn: classes, type: JavaExec) {
+task debug(dependsOn: 'classes', type: JavaExec) {
     description = 'Runs REST client script.'
     main = 'me.jerrywang.debug.RestClientRunner'
     classpath = sourceSets.main.runtimeClasspath
     systemProperties System.getProperties()
 }
 
-task rest(dependsOn: classes, type: JavaExec) {
+task debugXml(dependsOn: 'classes', type: JavaExec) {
+    main = 'me.jerrywang.debug.XmlOutputRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    systemProperties System.getProperties()
+}
+
+task rest(dependsOn: 'classes', type: JavaExec) {
     description = 'Runs REST API script.'
     main = 'me.jerrywang.rest.RestApiScriptRunner'
     classpath = sourceSets.main.runtimeClasspath
