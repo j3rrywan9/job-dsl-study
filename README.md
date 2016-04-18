@@ -7,7 +7,22 @@
 * Seed job runs DSL
 * Seed job updates/creates/deletes
 
-## Inheritance Hierarchy
+## Seed Job
+You can create the example seed job via the REST API Runner (see below) using the pattern jobs/seed.groovy.
+```
+./gradlew rest -Dpattern="jobs/seed.groovy" -DbaseUrl="http://jenkins.example.com"
+```
+Or manually create a job with the same structure:
+* Invoke Gradle script -> Use Gradle Wapper: true
+* Invoke Gradle script -> Tasks: clean test
+* Process Job DSLs -> DSL scripts: jobs/**/*Jobs.groovy
+* Process Job DSLs -> Additional classpath: src/main/groovy
+* Publish JUnit test result report -> Test report XMLs: build/test-results/**/*.xml
+
+## REST API Runner
+A Gradle task **rest** is configured that can be used to create/update jobs via the Jenkins REST API, if desired. Normally a seed job is used to keep jobs in sync with the DSL, but this runner might be useful if you'd rather process the DSL outside of the Jenkins environment or if you want to create the seed job from a DSL script.
+
+### Inheritance Hierarchy
 ```groovy
 class RestApiJobManagement extends MockJobManagement
 ```
@@ -36,7 +51,7 @@ InputStream streamFileInWorkspace(String filePath)
 String readFileInWorkspace(String filePath)
 ```
 
-## Call Stack
+### Call Stack
 ```
 me.jerrywang.rest.RestApiJobManagement.create
 
