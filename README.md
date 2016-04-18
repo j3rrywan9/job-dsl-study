@@ -7,6 +7,14 @@
 * Seed job runs DSL
 * Seed job updates/creates/deletes
 
+## Debug Generated XML
+```
+./gradle debugXml -Dpattern="jobs/*.groovy"
+```
+runs the DSL and writes the generated XML output to files in **build/debug-xml**.
+
+This can be useful if you want to inspect the generated XML before check-in.
+
 ## Seed Job
 You can create the example seed job via the REST API Runner (see below) using the pattern jobs/seed.groovy.
 ```
