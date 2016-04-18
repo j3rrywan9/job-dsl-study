@@ -4,6 +4,7 @@ import groovyx.net.http.ContentType
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.RESTClient
+import javaposse.jobdsl.dsl.*
 
 String baseUrl = System.getProperty('baseUrl')
 
@@ -29,8 +30,19 @@ String fetchExistingXml(String name, boolean isView) {
 }
 
 try {
-    println fetchExistingXml('seed', false)
+    // println fetchExistingXml('seed', false)
+    println getConfig('seed')
 } catch (HttpResponseException e) {
     println e.toString()
-    println e.getResponse().status
+    println e.response.getStatusLine().getStatusCode()
+} catch (JobConfigurationNotFoundException e) {
+    println e.toString()
+}
+
+String getConfig(String jobName) throws JobConfigurationNotFoundException {
+    String xml = fetchExistingXml(jobName, false)
+    if (!xml) {
+        throw new JobConfigurationNotFoundException(jobName)
+    }
+    xml
 }
