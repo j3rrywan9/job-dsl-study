@@ -10,7 +10,7 @@
 ## Seed Job
 You can create the example seed job via the REST API Runner (see below) using the pattern jobs/seed.groovy.
 ```
-./gradlew rest -Dpattern="jobs/seed.groovy" -DbaseUrl="http://jenkins.example.com"
+./gradlew rest -Dpattern="jobs/seed.groovy" -DbaseUrl="http://jenkins.example.com/"
 ```
 Or manually create a job with the same structure:
 * Invoke Gradle script -> Use Gradle Wapper: true
